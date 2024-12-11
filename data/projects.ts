@@ -29,4 +29,23 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/lyleLH/mt_tool',
     builtWith: ['Ruby', 'Cocoapods', 'Terminal'],
   },
+
+  {
+    type: 'self',
+    title: 'fork of wechat-format - markdown format for wechat',
+    description: `convert markdown to wechat format`,
+    imgSrc: 'https://github.com/lyleLH/wechat-format/blob/main/assets/images/banner.jpg?raw=true',
+    repo: 'lyleLH/wechat-format',
+    url: 'https://lylelh.github.io/wechat-format/',
+    builtWith: ['Javascript'],
+  },
+
+  {
+    type: 'self',
+    title: 'mini-saas-used-car-website',
+    description: `mini-saas-used-car-website`,
+    imgSrc: '/static/images/projects/used_car_sass_demo.png',
+    url: 'https://my-mini-saas-used-car-website-fwsx-jl163cihl-lylelhs-projects.vercel.app/',
+    builtWith: ['Javascript', 'React', 'NextJS', 'TailwindCSS'],
+  },
 ]
