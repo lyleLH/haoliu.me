@@ -1,12 +1,12 @@
 export const AUTHOR_INFO = {
-  name: 'Thomas Hao Liu',
+  name: 'Tom Hao Liu',
   description:
     'A personal space on the cloud where I document my programming journey, sharing lessons, insights, and resources for fellow developers.',
   email: 'v2top1lyle@gmail.com',
   identity: 'Learner | Builder',
   address: {
     city: 'North Vancouver, Canada',
-    flag: 'flag-Canada',
+    flag: 'flag-canada',
     timeZone: -8,
   },
   work: {
@@ -17,10 +17,10 @@ export const AUTHOR_INFO = {
   },
   social: {
     github: 'https://github.com/lyleLH',
-    x: '/',
+    x: 'https://x.com/td20190801/',
     facebook: '/',
     youtube: '/',
-    linkedin: '/',
+    linkedin: 'https://www.linkedin.com/in/haoliuv2top1/',
     threads: '/',
     instagram: '/',
     juejin: '/',

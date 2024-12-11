@@ -22,20 +22,27 @@ const SOCIALS = [
     Icon: () => <Github size={20} strokeWidth={1.5} />,
     umamiEvent: 'profile-card-github',
   },
-  // {
-  //   platform: 'linkedin',
-  //   handle: getAccountHandle(AUTHOR_INFO.social.linkedin),
-  //   href: AUTHOR_INFO.social.linkedin,
-  //   Icon: () => <Linkedin size={20} strokeWidth={1.5} />,
-  //   umamiEvent: 'profile-card-linkedin',
-  // },
   {
-    platform: 'juejin',
-    handle: getAccountHandle(AUTHOR_INFO.social.juejin),
-    href: AUTHOR_INFO.social.juejin,
-    Icon: () => <JuejinIcon className="h-5 w-5" />,
+    platform: 'linkedin',
+    handle: 'haoliu',
+    href: AUTHOR_INFO.social.linkedin,
+    Icon: () => <Linkedin size={20} strokeWidth={1.5} />,
+    umamiEvent: 'profile-card-linkedin',
+  },
+  {
+    platform: 'x',
+    handle: 'tomliu',
+    href: AUTHOR_INFO.social.x,
+    Icon: () => <XIcon className="h-3.5 w-3.5" fill="#fff" viewBox="0 0 1200 1227" />,
     umamiEvent: 'profile-card-x',
   },
+  // {
+  //   platform: 'juejin',
+  //   handle: getAccountHandle(AUTHOR_INFO.social.juejin),
+  //   href: AUTHOR_INFO.social.juejin,
+  //   Icon: () => <JuejinIcon className="h-5 w-5" />,
+  //   umamiEvent: 'profile-card-juejin',
+  // },
 ]
 
 export function ProfileCardInfo() {

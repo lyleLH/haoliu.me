@@ -46,21 +46,20 @@ export function TypedBios() {
         </li>
         <li>I'm a learner, builder, and freedom seeker.</li>
         <li>
-          I live in <b className="font-medium">North Vancouver, Canada</b>.
-        </li>
-        <li>
           The first programming language I learned is <b className="font-medium">Objective-C</b>.
         </li>
-        <li>I have strong background in Architecture design.</li>
-        <li>I love full stack development.</li>
+        <li>I have strong background in Architecture Design with SOLID principles.</li>
+        <li>
+          I love full stack development. So now I'm learning React/Next.js and Node.js and
+          postgreSQL.
+        </li>
         <li>I work mostly with Swift/UIKit and Dart/Flutter technologies.</li>
         <li>
           I'm a sport-guy. I love
           <span className="ml-1">
-            <Twemoji emoji="soccer-ball" />,
-            <Twemoji emoji="man-swimming" />,
-            <Twemoji emoji="ping-pong" />,
-            <Twemoji emoji="volleyball" />
+            <Twemoji emoji="flexed-biceps" />,
+            <Twemoji emoji="man-walking" />,
+            <Twemoji emoji="person-mountain-biking" />
           </span>
         </li>
       </ul>
