@@ -5,8 +5,6 @@ I created this blog to record and share my learnings and insights as a software 
 
 Recording and organizing my thoughts helps me solidify my understanding of new concepts and technologies. My goal is to provide a useful resource for those interested in web development and related technologies.
 
-Your comments and feedback are highly appreciated 🍻. They contribute to the growth and improvement of this blog.
-
 ## Tech stack
 
 - 🪤 Hosted on [Vercel](https://vercel.com/).
