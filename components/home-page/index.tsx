@@ -30,7 +30,6 @@ export function Home({
                 in 2015.
               </p>
               <p>I have a passion for full stack development.</p>
-              <p>I have strong background in iOS Architecture design.</p>
               <p>I started this blog to document and share my knowledge & experience.</p>
             </div>
             <BlogLinks />

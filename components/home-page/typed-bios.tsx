@@ -51,6 +51,7 @@ export function TypedBios() {
         <li>
           The first programming language I learned is <b className="font-medium">Objective-C</b>.
         </li>
+        <li>I have strong background in Architecture design.</li>
         <li>I love full stack development.</li>
         <li>I work mostly with Swift/UIKit and Dart/Flutter technologies.</li>
         <li>

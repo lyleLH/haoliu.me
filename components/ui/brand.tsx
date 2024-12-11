@@ -59,6 +59,10 @@ import Leetcode from '~/icons/leetcode.svg'
 import Ruby from '~/icons/ruby.svg'
 import Cocoapods from '~/icons/cocoapods.svg'
 import Terminal from '~/icons/terminal.svg'
+import Swift from '~/icons/swift-svgrepo-com.svg'
+import SwiftPackageManager from '~/icons/swiftpackageindex-com.svg'
+import Flutter from '~/icons/flutter-svgrepo-com.svg'
+import ObjectiveC from '~/icons/Objective-C.svg'
 export const BrandsMap = {
   React: {
     Icon: React,
@@ -307,6 +311,22 @@ export const BrandsMap = {
   Terminal: {
     Icon: Terminal,
     url: 'https://www.gnu.org/software/bash',
+  },
+  Swift: {
+    Icon: Swift,
+    url: 'https://swift.org',
+  },
+  SwiftPackageManager: {
+    Icon: SwiftPackageManager,
+    url: 'https://swift.org',
+  },
+  Flutter: {
+    Icon: Flutter,
+    url: 'https://flutter.dev',
+  },
+  ObjectiveC: {
+    Icon: ObjectiveC,
+    url: 'https://developer.apple.com/documentation/objectivec',
   },
 }
 
