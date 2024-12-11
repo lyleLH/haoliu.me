@@ -1,11 +1,4 @@
-<h1 align="center">mengke.me 🧑‍💻</h1>
-
-<div align="center">
-
-[简体中文](./README_zh-CN.md) | [繁体中文](./README_zh-TW.md) | [日本語](./README_ja.md)
-
-</div>
-
+ 
 <img style="border-radius: 6px" src="./public/static/images/home_page.webp">
 
 ## Motivation
