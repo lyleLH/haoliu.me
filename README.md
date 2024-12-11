@@ -1,5 +1,3 @@
- 
-<img style="border-radius: 6px" src="./public/static/images/home_page.webp">
 
 ## Motivation
 
