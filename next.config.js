@@ -124,7 +124,11 @@ module.exports = () => {
           headers: [
             {
               key: 'Content-Security-Policy',
-              value: "frame-src 'self' https://www.youtube.com",
+              value: "frame-src 'self' https://www.youtube.com https://giscus.app",
+            },
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: 'https://giscus.app',
             },
           ],
         },
