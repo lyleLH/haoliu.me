@@ -41,7 +41,7 @@ export async function POST(request: NextRequest, { params }: Params) {
     })
 
     return NextResponse.json({
-      total: newOrUpdatedViews.count.toString(),
+      total: newOrUpdatedViews?.count?.toString(),
       slug,
     })
   } catch (e) {
