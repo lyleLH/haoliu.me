@@ -9,12 +9,14 @@ export function SearchButton() {
     const SearchButton = search.provider === 'algolia' ? AlgoliaButton : KBarButton
 
     return (
-      <SearchButton
-        aria-label="Search"
-        className="rounded p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700"
-      >
-        <Command size={20} strokeWidth={1.5} />
-      </SearchButton>
+      <div style={{ position: 'relative', zIndex: 1000 }}>
+        <SearchButton
+          aria-label="Search"
+          className="rounded p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          <Command size={20} strokeWidth={1.5} />
+        </SearchButton>
+      </div>
     )
   }
 }

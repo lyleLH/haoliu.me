@@ -11,7 +11,7 @@ import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 export function SnippetCard({ snippet }: { snippet: CoreContent<Snippet> }) {
   const { icon, heading, summary, title, path } = snippet
   return (
-    <GradientBorder className="rounded-2xl">
+    <GradientBorder className="relative z-0 rounded-2xl">
       <Link
         href={`/${path}`}
         title={title}
@@ -26,7 +26,7 @@ export function SnippetCard({ snippet }: { snippet: CoreContent<Snippet> }) {
         <Brand
           name={icon as keyof typeof BrandsMap}
           as="icon"
-          className="absolute -top-5 left-4 z-10 h-12 w-12 text-gray-900 dark:text-white"
+          className="absolute -top-5 left-4 z-[2] h-12 w-12 text-gray-900 dark:text-white"
         />
         <div className="relative w-full px-4 pb-6 pt-6">
           <h3 className="mt-4 text-xl font-semibold leading-7">

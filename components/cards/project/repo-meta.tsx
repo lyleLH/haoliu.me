@@ -4,7 +4,7 @@ import type { GithubRepository } from '~/types/data'
 export function RepoMeta({ repo }: { repo: GithubRepository }) {
   const mainLanguage = repo.languages[0]
   return (
-    <div className="flex items-center justify-between">
+    <div className="relative z-0 flex items-center justify-between">
       <div className="flex items-center gap-3 md:gap-4">
         <div className="flex items-center space-x-1.5">
           <span

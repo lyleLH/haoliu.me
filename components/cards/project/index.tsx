@@ -25,6 +25,7 @@ export function ProjectCard({
     <RadiantCard
       className={clsx([
         'flex flex-col gap-6 p-4 md:h-80 md:flex-row md:gap-12 md:p-8',
+        'relative z-0',
         reversed && 'md:flex-row-reverse',
       ])}
     >
