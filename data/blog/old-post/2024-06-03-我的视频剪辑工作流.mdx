@@ -1,0 +1,81 @@
+---
+title: '我的视频剪辑工作流'
+date: '2024-06-03'
+tags: []
+draft: false
+summary: ''
+images: ['https://cdn.pixabay.com/photo/2020/04/20/18/10/cinema-5069314_1280.jpg']
+authors: ['default']
+---
+
+## 视频剪辑 Shotcut 基本操作
+
+<iframe
+  width="720"
+  height="480"
+  src="https://www.youtube.com/embed/PCMcyYAtRzw"
+  title="Shotcut Video Editor Tutorial"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+## 使用 Canva 制作片头和片尾
+
+- [Canva](https://www.canva.com/)
+
+<iframe
+  width="720"
+  height="480"
+  src="https://www.youtube.com/embed/ZqqEknHk3FY"
+  title="【YouTube片頭動畫教學】5分鐘打造專屬片頭動畫 | 視頻片頭製作"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+## 使用 Suno 制作音乐
+
+[Suno](https://suno.com/create)
+
+<iframe
+  width="720"
+  height="480"
+  src="https://www.youtube.com/embed/fDx5BgIl0dQ"
+  title="3分钟学会使用Suno V3，完成Lofi音乐视频制作 - 可开通Youtube获利"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+## 使用到的素材
+
+- [背景图](https://www.artstation.com/artwork/dOK5R3)
+
+## 自动剪辑 和到处到精细剪辑
+
+视频自动移除空白和停顿
+
+- [auto-editor](https://github.com/WyattBlue/auto-editor)
+- [installing](https://auto-editor.com/installing)
+
+```
+auto-editor example.mp4 --export shotcut
+```
+
+## 提取mp3
+
+```
+ffmpeg -i 2024-12-03\ 10-35-37_ALTERED.mov -f mp3 -vn bb.mp3
+```
+
+## 转录 mp3 成字幕srt文件
+
+![pyTranscriber](/static/images/blog/oldpost/SCR-20241203-lniv.png)
+
+## 视频和字幕编辑，合成导出
+
+![shotcut](/static/images/blog/oldpost/SCR-20241203-mvdy.png)

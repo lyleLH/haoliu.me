@@ -60,3 +60,5 @@
 ## ☕️ 支持 Mengke
 
 <a href='https://ko-fi.com/P5P2ZV7NP' target='_blank'><img height='50' style='border:0px;height:50px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+### 如何获取 REPO REPOSITORY_ID CATEGORY CATEGORY_ID

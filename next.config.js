@@ -100,6 +100,14 @@ module.exports = () => {
         },
         {
           protocol: 'https',
+          hostname: 'camo.githubusercontent.com', // blog images
+        },
+        {
+          protocol: 'https',
+          hostname: 'user-images.githubusercontent.com', // blog images
+        },
+        {
+          protocol: 'https',
           hostname: 'cdn.pixabay.com', // blog images
         },
       ],

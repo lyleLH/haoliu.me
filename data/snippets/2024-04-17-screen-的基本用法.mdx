@@ -1,0 +1,58 @@
+---
+icon: 'Terminal'
+heading: 'Screen 的基本用法'
+title: 'Screen 的基本用法'
+date: '2024-04-17'
+tags: []
+draft: false
+summary: '在CentOS上安装screen, 并使用screen的基本用法'
+images:
+  [
+    'https://camo.githubusercontent.com/d00b356eb73803324be81e74bd6187b0af70e1dd24b76b1121cb8b068d83fa81/68747470733a2f2f692e696d6775722e636f6d2f47466d433541642e706e67',
+  ]
+authors: ['default']
+---
+
+## Install
+
+In CentOS
+
+`yum install screen -y`
+
+## Usage
+
+新建一个screen会话
+
+```shell
+screen -S <名字>
+```
+
+退出当前screen会话
+
+```shell
+键盘点击ctrl+a , 然后按d
+```
+
+查看所有screen会话
+
+```shell
+screen -ls
+```
+
+进入（恢复）某一screen会话
+
+```shell
+screen -r <会话序列号>
+```
+
+获得会话序列号可通过
+
+```shell
+screen -ls
+```
+
+关闭screen会话
+
+```shell
+screen -X -S <序列号> quit
+```

@@ -55,7 +55,10 @@ import Qiankun from '~/icons/qiankun.svg'
 import Weibo from '~/icons/weibo.svg'
 import I18n from '~/icons/i18n.svg'
 import Apple from '~/icons/apple.svg'
-
+import Leetcode from '~/icons/leetcode.svg'
+import Ruby from '~/icons/ruby.svg'
+import Cocoapods from '~/icons/cocoapods.svg'
+import Terminal from '~/icons/terminal.svg'
 export const BrandsMap = {
   React: {
     Icon: React,
@@ -288,6 +291,22 @@ export const BrandsMap = {
   Apple: {
     Icon: Apple,
     url: 'https://www.apple.com/ios',
+  },
+  Leetcode: {
+    Icon: Leetcode,
+    url: 'https://leetcode.com',
+  },
+  Ruby: {
+    Icon: Ruby,
+    url: 'https://www.ruby-lang.org',
+  },
+  Cocoapods: {
+    Icon: Cocoapods,
+    url: 'https://cocoapods.org',
+  },
+  Terminal: {
+    Icon: Terminal,
+    url: 'https://www.gnu.org/software/bash',
   },
 }
 

@@ -1,0 +1,43 @@
+---
+icon: 'Git'
+heading: '基于Git的开发模型'
+title: '基于Git的开发模型'
+date: '2019-04-15'
+tags: ['git', 'best practice', 'Develop Tools']
+draft: false
+summary: '介绍一下10年来被证明是成功并且行之有效的`Git`开发模型。'
+images: ['/static/images/blog/oldpost/git-model@2x.png']
+authors: ['default']
+---
+
+---
+
+### 关键分支（永久的）
+
+- `master`
+- `develop`
+
+### 辅助分支（临时的）
+
+- relase
+  - **May** checkout from `develop`
+  - **Must** merge into `master` and `develop`
+  - deleted when merged, **Then** `tag` on `master`
+- feature
+  - **May** checkout from `develop`
+  - **Must** merge into `develop` or `release`
+  - deleted when merged
+- hotfixes
+  - **May** checkout from `master`
+  - **Must** merge back into `develop` and `master`
+  - deleted when merged
+
+### 时序示意图
+
+![img](/static/images/blog/oldpost/git-model@2x.png)
+
+### 来源
+
+原文 : [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+
+翻译 : [介绍一个成功的 Git 分支模型 Release 分支](https://www.cnblogs.com/yaks/p/5666400.html)
