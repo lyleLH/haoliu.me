@@ -283,8 +283,11 @@
 .twa-man-walking {
   background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f6b6.svg');
 }
-.twa-body-builder {
+.twa-flexed-biceps {
   background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f4aa.svg');
+}
+.twa-person-mountain-biking {
+  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f6b5.svg');
 }
 .twa-dog {
   background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f415.svg');
