@@ -1,22 +1,9 @@
-<h1 align="center">mengke.me 🧑‍💻</h1>
-
-<div align="center">
-
-[简体中文](./README_zh-CN.md) | [繁体中文](./README_zh-TW.md) | [日本語](./README_ja.md)
-
-</div>
-
-<img style="border-radius: 6px" src="./public/static/images/home_page.webp">
 
 ## Motivation
-
-> Sharing is learning!
-
+ 
 I created this blog to record and share my learnings and insights as a software engineer, but also to keep track of my life. It is a treasure trove of valuable information that I have accumulated throughout my journey.
 
 Recording and organizing my thoughts helps me solidify my understanding of new concepts and technologies. My goal is to provide a useful resource for those interested in web development and related technologies.
-
-Your comments and feedback are highly appreciated 🍻. They contribute to the growth and improvement of this blog.
 
 ## Tech stack
 
@@ -24,10 +11,6 @@ Your comments and feedback are highly appreciated 🍻. They contribute to the g
 - 🧱 Built with **React 18+**, **NextJS 14+**.
 - 📊 Monitoring site with [Umami](https://umami.is/) website analytics.
 - 🎉 Adopting **Typescript**, committing with [Conventional Commits](https://www.conventionalcommits.org/).
-
-## DEMO
-
-You can see what the blog looks like here: <https://mengke.me>
 
 ## How to deploy a similar blog?
 
