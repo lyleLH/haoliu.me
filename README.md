@@ -14,10 +14,6 @@ Your comments and feedback are highly appreciated 🍻. They contribute to the g
 - 📊 Monitoring site with [Umami](https://umami.is/) website analytics.
 - 🎉 Adopting **Typescript**, committing with [Conventional Commits](https://www.conventionalcommits.org/).
 
-## DEMO
-
-You can see what the blog looks like here: <https://mengke.me>
-
 ## How to deploy a similar blog?
 
 ### 1. Installation
