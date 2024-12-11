@@ -115,6 +115,9 @@ export const Blog = defineDocumentType(() => ({
       }),
     },
   },
+  mdx: {
+    allowDangerousHtml: true,
+  },
 }))
 
 export const Snippet = defineDocumentType(() => ({
