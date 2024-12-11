@@ -1,8 +1,6 @@
 
 ## Motivation
-
-> Sharing is learning!
-
+ 
 I created this blog to record and share my learnings and insights as a software engineer, but also to keep track of my life. It is a treasure trove of valuable information that I have accumulated throughout my journey.
 
 Recording and organizing my thoughts helps me solidify my understanding of new concepts and technologies. My goal is to provide a useful resource for those interested in web development and related technologies.
