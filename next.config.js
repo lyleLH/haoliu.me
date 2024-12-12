@@ -13,7 +13,7 @@ const ContentSecurityPolicy = `
   media-src *.s3.amazonaws.com;
   connect-src *;
   font-src 'self';
-  frame-src giscus.app *.github.io *.google.com codepen.io
+  frame-src giscus.app *.github.io *.google.com docs.google.com *.docs.google.com
 `
 
 const securityHeaders = [
@@ -124,11 +124,12 @@ module.exports = () => {
           headers: [
             {
               key: 'Content-Security-Policy',
-              value: "frame-src 'self' https://www.youtube.com https://giscus.app",
+              value:
+                "frame-src 'self' https://www.youtube.com https://giscus.app https://docs.google.com https://*.docs.google.com",
             },
             {
               key: 'Access-Control-Allow-Origin',
-              value: 'https://giscus.app',
+              value: 'https://giscus.app https://docs.google.com',
             },
           ],
         },
