@@ -63,6 +63,8 @@ import Swift from '~/icons/swift-svgrepo-com.svg'
 import SwiftPackageManager from '~/icons/swiftpackageindex-com.svg'
 import Flutter from '~/icons/flutter-svgrepo-com.svg'
 import ObjectiveC from '~/icons/Objective-C.svg'
+import Keyboard from '~/icons/keyboard-shortcut-svgrepo-com.svg'
+
 export const BrandsMap = {
   React: {
     Icon: React,
@@ -327,6 +329,10 @@ export const BrandsMap = {
   ObjectiveC: {
     Icon: ObjectiveC,
     url: 'https://developer.apple.com/documentation/objectivec',
+  },
+  Keyboard: {
+    Icon: Keyboard,
+    url: 'https://imhaoliu.com',
   },
 }
 

@@ -1,1 +1,8 @@
-{}
+{
+  "cssTheme": "Minimal",
+  "interfaceFontFamily": "IBM Plex Sans",
+  "textFontFamily": "IBM Plex Sans",
+  "baseFontSizeAction": true,
+  "accentColor": "",
+  "translucency": true
+}
