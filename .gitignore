@@ -54,3 +54,10 @@ yarn-error.log*
 .eslintcache
 
 scripts/imdb-movies.csv
+# obsidian
+data/.obsidian/*
+data/.obsidian/workspace.json
+json/tag-data.json
+/data/.smart-env
+/data/.obsidian
+json/tag-data.json
