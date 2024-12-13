@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "snippets/xinmeng-m71基本使用说明.mdx",
+                "file": "snippets/openai-whisper-tips.mdx",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "xinmeng-m71基本使用说明"
+              "title": "openai-whisper-tips"
             }
           }
         ],
@@ -102,7 +102,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -193,9 +194,13 @@
   },
   "active": "f9aee4d4b72278da",
   "lastOpenFiles": [
+    "snippets/xinmeng-m71基本使用说明.mdx",
+    "snippets/openai-whisper-tips.mdx",
+    "snippets/openai-whisper-tips.msx",
+    "snippets/openai-whisper-tips",
+    "snippets/xinmeng-m71基本使用说明.mdx copy",
     "blog/202412/interactivebrokers.mdx",
     "snippets/xinmeng-m71基本使用说明.mdx.md",
-    "snippets/xinmeng-m71基本使用说明.mdx",
     "snippets/use-local-storage-state.mdx",
     "authors/default.mdx",
     "blog/202412/money-flow-record.mdx",

@@ -29,7 +29,16 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/lyleLH/mt_tool',
     builtWith: ['Ruby', 'Cocoapods', 'Terminal'],
   },
-
+  {
+    type: 'self',
+    title: 'WhispeerYou - Whisper youtube video',
+    description: `A powerful and intuitive automation multi-tool, primarily designed to extract audio from YouTube videos, transcribe it into text, detect the language, and save the transcription as a .txt file. This core feature is complemented by many other functionalities, making it an essential tool for streamlining your workflow with cutting-edge technology.`,
+    imgSrc:
+      'https://raw.githubusercontent.com/lyleLH/WhispeerYou/refs/heads/main/fbea7019-8b36-45da-ad83-0dbf79009e1b.jpeg',
+    repo: 'lyleLH/WhispeerYou',
+    url: 'https://github.com/lyleLH/WhispeerYou',
+    builtWith: ['Python', 'OpenAI'],
+  },
   {
     type: 'self',
     title: 'fork of wechat-format - markdown format for wechat',
