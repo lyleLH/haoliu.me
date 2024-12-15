@@ -22,6 +22,13 @@
   },
   {
     "type": "friend",
+    "name": "BoboZeng",
+    "slogan": "理性，长期，趋势，宏观 | 美股投资市场总结执行日记",
+    "imgSrc": "/static/images/friends/cropped-mwe_8bwf_400x400.webp",
+    "url": "https://boist.org/?ref=haoliu.me"
+  },
+  {
+    "type": "friend",
     "name": "kkjz",
     "slogan": "因为不想随波逐流，所以总是在人生中迷失方向",
     "imgSrc": "/static/images/friends/kkjz.jpeg",
