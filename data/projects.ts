@@ -21,6 +21,23 @@ export const PROJECTS: Project[] = [
 
   {
     type: 'self',
+    title: 'axis-t.com',
+    description: `Independent Blog AI Selection`,
+    imgSrc: '/static/images/projects/axis-t.com.jpeg',
+    url: 'https://axis-t.com',
+    builtWith: ['NextJS', 'TailwindCSS', 'Typescript'],
+  },
+  {
+    type: 'self',
+    title: ' MoE Card App',
+    description: `Creation canvas for fun.`,
+    imgSrc: '/static/images/blog/202501/moe-marketing.png',
+    url: 'https://www.moecard.app/',
+    builtWith: ['Apple', 'Swift', 'SwiftPackageManager'],
+  },
+
+  {
+    type: 'self',
     title: 'mt_tool - viper module files generator',
     description: `Quickly generate Viper module files for iOS development.`,
     imgSrc:
@@ -34,7 +51,7 @@ export const PROJECTS: Project[] = [
     title: 'WhispeerYou - Whisper youtube video',
     description: `A powerful and intuitive automation multi-tool, primarily designed to extract audio from YouTube videos, transcribe it into text, detect the language, and save the transcription as a .txt file. This core feature is complemented by many other functionalities, making it an essential tool for streamlining your workflow with cutting-edge technology.`,
     imgSrc:
-      'https://raw.githubusercontent.com/lyleLH/WhispeerYou/refs/heads/main/fbea7019-8b36-45da-ad83-0dbf79009e1b.jpeg',
+      'https://github.com/lyleLH/WhispeerYou/raw/main/imgs/fbea7019-8b36-45da-ad83-0dbf79009e1b.jpeg',
     repo: 'lyleLH/WhispeerYou',
     url: 'https://github.com/lyleLH/WhispeerYou',
     builtWith: ['Python', 'OpenAI'],
