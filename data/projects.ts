@@ -18,7 +18,14 @@ export const PROJECTS: Project[] = [
     url: '/blog/202011/Shouyintong_app',
     builtWith: ['ObjectiveC', 'Swift', 'Cocoapods', 'Flutter'],
   },
-
+  {
+    type: 'self',
+    title: 'ixHush.app',
+    description: `Mix & Play White Noise`,
+    imgSrc: '/static/images/blog/202504/ixhush_marketing.png',
+    url: 'https://ixHush.app',
+    builtWith: ['Apple', 'Swift', 'SwiftPackageManager'],
+  },
   {
     type: 'self',
     title: 'axis-t.com',
