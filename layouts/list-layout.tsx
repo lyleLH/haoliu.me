@@ -1,11 +1,12 @@
 'use client'
 
-import type { Blog } from 'contentlayer/generated'
+import type { Blog, Wiki } from 'contentlayer/generated'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import type { CoreContent } from 'pliny/utils/contentlayer'
 import { useState } from 'react'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
+import { WikiCard } from '~/components/cards/wiki'
 import { SearchArticles } from '~/components/blog/search-articles'
 import { Link } from '~/components/ui/link'
 import { Container } from '~/components/ui/container'
@@ -17,9 +18,9 @@ interface PaginationProps {
   currentPage: number
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog>[]
+  posts: CoreContent<Blog | Wiki>[]
   title: string
-  initialDisplayPosts?: CoreContent<Blog>[]
+  initialDisplayPosts?: CoreContent<Blog | Wiki>[]
   pagination?: PaginationProps
 }
 
@@ -81,14 +82,14 @@ export function ListLayout({
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-  const filteredBlogPosts = posts.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const searchContent = post.title + post.summary + post.tags?.join(' ')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
   const displayPosts =
-    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
+    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredPosts
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -99,13 +100,17 @@ export function ListLayout({
       >
         <SearchArticles label="Search articles" onChange={(e) => setSearchValue(e.target.value)} />
       </PageHeader>
-      {!filteredBlogPosts.length ? (
+      {!filteredPosts.length ? (
         <div className="py-10">No posts found.</div>
       ) : (
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 py-10 md:gap-y-16 lg:grid-cols-2 xl:grid-cols-3">
-          {displayPosts.map((post) => (
-            <PostCardGridView key={post.path} post={post} />
-          ))}
+          {displayPosts.map((post) =>
+            post.type === 'Blog' ? (
+              <PostCardGridView key={post.path} post={post as CoreContent<Blog>} />
+            ) : (
+              <WikiCard key={post.path} wiki={post as CoreContent<Wiki>} />
+            )
+          )}
         </div>
       )}
       {pagination && pagination.totalPages > 1 && !searchValue && (

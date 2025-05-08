@@ -162,6 +162,52 @@ export const Snippet = defineDocumentType(() => ({
   },
 }))
 
+export const Wiki = defineDocumentType(() => ({
+  name: 'Wiki',
+  filePathPattern: 'wiki/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: {
+      type: 'string',
+      required: true,
+    },
+    date: {
+      type: 'date',
+      required: true,
+    },
+    tags: {
+      type: 'list',
+      of: { type: 'string' },
+      default: [],
+    },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    authors: { type: 'list', of: { type: 'string' } },
+    layout: { type: 'string' },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
+    link: { type: 'string' },
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : SITE_METADATA.socialBanner,
+        url: `${SITE_METADATA.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
+}))
+
 export const Author = defineDocumentType(() => ({
   name: 'Author',
   filePathPattern: 'authors/**/*.mdx',
@@ -182,7 +228,7 @@ export const Author = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Snippet, Author],
+  documentTypes: [Blog, Snippet, Author, Wiki],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
