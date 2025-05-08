@@ -1,0 +1,138 @@
+---
+heading: 'iOS Interview Questions and Answers'
+title: 'Array Processing in Swift'
+date: '2025-05-08'
+icon: 'Apple'
+draft: false
+summary: "Copy-on-Write Check: Swift checks if the array's storage is shared with any other variables."
+tags: [iOS, WebView, SwiftUI]
+---
+
+When you modify an array in Swift by changing a value or appending a new element, several important things happen under the hood. Understanding this process is crucial for writing efficient Swift code.
+
+## Modifying an Existing Value
+
+When you change a value at an existing index:
+
+```swift
+var fruits = ["Apple", "Orange", "Banana"]
+fruits[1] = "Mango"  // Change "Orange" to "Mango"
+```
+
+Here's what happens:
+
+1. **Copy-on-Write Check**: Swift checks if the array's storage is shared with any other variables
+
+2. **If Shared**: Swift creates a complete copy of the array's storage before making the change
+
+   ```swift
+   var fruits1 = ["Apple", "Orange", "Banana"]
+   var fruits2 = fruits1  // Both reference the same storage
+   fruits2[1] = "Mango"   // Copy-on-write triggers here
+   // Now fruits1 = ["Apple", "Orange", "Banana"]
+   // and fruits2 = ["Apple", "Mango", "Banana"]
+   ```
+
+3. **If Not Shared**: Swift modifies the array directly without creating a copy
+
+   ```swift
+   var fruits = ["Apple", "Orange", "Banana"]
+   fruits[1] = "Mango"   // No copy needed, direct modification
+   ```
+
+4. **Reference Count Management**: The system updates reference counts as needed
+
+5. **Memory Layout**: The array's internal storage remains the same size since you're just replacing an element
+
+## Appending a Value
+
+When you append a new element:
+
+```swift
+var numbers = [1, 2, 3]
+numbers.append(4)  // Add a new element
+```
+
+Here's what happens:
+
+1. **Copy-on-Write Check**: Same as above, Swift checks if the storage is shared
+
+2. **Capacity Check**: Swift checks if the current capacity can accommodate the new element
+
+   ```swift
+   print(numbers.count)      // Elements currently in use
+   print(numbers.capacity)   // Total allocated space
+   ```
+
+3. **If Capacity Sufficient**: Swift adds the new element at the end without reallocating
+
+   ```swift
+   // If capacity is 4 and count is 3
+   numbers.append(4)  // Just adds the element, no reallocation
+   ```
+
+4. **If Capacity Insufficient**: Swift allocates a new, larger storage buffer
+
+   ```swift
+   // If capacity is 3 and count is 3
+   numbers.append(4)  // Triggers reallocation to larger capacity
+   ```
+
+   The reallocation typically follows a growth factor (often around 2x):
+
+   - If capacity was 3, new capacity might be 6
+   - All existing elements are copied to the new storage
+   - The new element is added
+   - The old storage is deallocated
+
+5. **Memory Management**: Reference counting ensures proper deallocation of the old buffer if needed
+
+## Performance Implications
+
+### For Changing Existing Values
+
+- **Best Case**: O(1) time complexity if not shared
+- **Worst Case**: O(n) if copy-on-write is triggered (where n is array size)
+
+### For Appending Elements
+
+- **Amortized Time Complexity**: O(1)
+
+- Individual Append
+
+  :
+
+  - Usually O(1) when capacity is sufficient
+  - O(n) when reallocation occurs
+
+- **Multiple Appends**: The occasional O(n) operation is amortized across many O(1) operations, resulting in O(1) average time per operation
+
+## Practical Tips
+
+1. **Reserve Capacity**: For best performance when adding many elements:
+
+   ```swift
+   var numbers = [Int]()
+   numbers.reserveCapacity(1000)  // Allocate space once
+   for i in 1...1000 {
+       numbers.append(i)  // No reallocations during appends
+   }
+   ```
+
+2. **Avoid Shared Copies when Modifying**: If you know you'll modify an array, consider creating a unique copy first:
+
+   ```swift
+   var uniqueCopy = originalArray  // Still shared
+   uniqueCopy.reserveCapacity(uniqueCopy.count)  // Forces a unique copy
+   // Now modifications won't trigger copy-on-write
+   ```
+
+3. **Batch Operations**: Prefer array transformations like `map` or `filter` over individual modifications when possible
+
+4. **Arrays vs Other Collections**: Consider using other collection types if your usage pattern doesn't match array strengths:
+
+   - `Set` for frequent membership tests
+   - `Dictionary` for key-based lookup
+   - `ContiguousArray` for performance-critical code with value types
+
+Understanding this process helps you write more efficient code and avoid unexpected performance bottlenecks when working with arrays in Swift.

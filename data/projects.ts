@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     description: `Independent Blog AI Selection`,
     imgSrc: '/static/images/projects/axis-t.com.jpeg',
     url: 'https://axis-t.com',
-    builtWith: ['NextJS', 'TailwindCSS', 'Typescript'],
+    builtWith: ['NextJS', 'TailwindCSS', 'Typ   escript'],
   },
   {
     type: 'self',

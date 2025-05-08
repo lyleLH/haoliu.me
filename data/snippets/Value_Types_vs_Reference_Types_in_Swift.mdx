@@ -1,0 +1,130 @@
+---
+heading: 'iOS Interview Questions and Answers'
+title: 'Value Types vs Reference Types in Swift'
+date: '2025-05-08'
+icon: 'Apple'
+draft: false
+summary: 'Value Types vs Reference Types in Swift. Value types and reference types are two fundamental ways data is stored and managed in Swift, with important implications for how your code behaves. '
+tags: [iOS, WebView, SwiftUI]
+---
+
+Value types and reference types are two fundamental ways data is stored and managed in Swift, with important implications for how your code behaves.
+
+## Value Types
+
+Value types are copied when assigned to a variable, constant, or passed to a function. Each instance keeps a unique copy of its data.
+
+### Key Characteristics:
+
+- Copied when assigned or passed to functions
+- Mutations don't affect other copies
+- Thread-safe by default (since each thread works with its own copy)
+- Memory typically allocated on the stack (faster allocation/deallocation)
+
+### Common Value Types in Swift:
+
+- Structs (`struct`)
+- Enumerations (`enum`)
+- Tuples
+- Basic types like `Int`, `Double`, `String`, `Bool`
+- Collections like `Array`, `Dictionary`, `Set`
+
+### Example:
+
+```swift
+struct Point {
+    var x: Int
+    var y: Int
+}
+
+var point1 = Point(x: 10, y: 20)
+var point2 = point1  // Creates a complete copy
+point2.x = 30        // Only modifies point2
+
+print(point1.x)      // 10 (unchanged)
+print(point2.x)      // 30
+```
+
+## Reference Types
+
+Reference types share a single copy of data, and the variable holds a reference (or pointer) to that data in memory.
+
+### Key Characteristics:
+
+- References are copied when assigned or passed (not the underlying data)
+- Changes affect all references to the same instance
+- Not inherently thread-safe (multiple threads can access/modify the same data)
+- Memory typically allocated on the heap (more overhead)
+- Require memory management (handled by ARC in Swift)
+
+### Common Reference Types in Swift:
+
+- Classes (`class`)
+- Closures
+- Functions
+- Actor (thread-safe reference type in Swift 5.5+)
+
+### Example:
+
+```swift
+class Person {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+}
+
+let person1 = Person(name: "John")
+let person2 = person1         // Both reference the same instance
+person2.name = "Jane"         // Changes the shared instance
+
+print(person1.name)           // "Jane" (affected by the change)
+print(person2.name)           // "Jane"
+```
+
+## Choosing Between Value and Reference Types
+
+### Use Value Types When:
+
+- Comparing instances based on their data makes sense (equality)
+- You want copies to be independent
+- The data is relatively small
+- You want thread safety without synchronization
+- Data encapsulates a single value, like coordinates or amounts
+
+### Use Reference Types When:
+
+- Identity comparison is important (are we looking at the exact same instance?)
+- You want to share mutable state
+- The model requires inheritance
+- The data is large and copying would be inefficient
+- The lifetime of the instance needs to be managed
+
+## Important Considerations
+
+### Memory Management:
+
+- Value types typically don't create retain cycles
+- Reference types can create retain cycles (memory leaks) if references form a cycle
+
+### Mutability:
+
+```swift
+// Value type
+let structValue = Point(x: 5, y: 10)
+structValue.x = 20  // Error! Cannot modify property of immutable value
+
+// Reference type
+let classReference = Person(name: "Alex")
+classReference.name = "Alex Smith"  // Works! The reference is constant, not the content
+```
+
+### Swift's Copy-on-Write:
+
+Many Swift standard library value types (like Array and Dictionary) implement "copy-on-write" for efficiency:
+
+- Data is shared between copies until one is modified
+- Only when a shared value is modified does the actual copying occur
+
+Understanding the differences between value and reference types is crucial for writing efficient, predictable Swift code and avoiding subtle bugs related to unexpected shared state.
