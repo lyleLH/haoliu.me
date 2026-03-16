@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import type { Blog } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost } from '~/server/content-api'
+
 import { TagsList } from '~/components/blog/tags'
 import { GritBackground } from '~/components/ui/grit-background'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
@@ -13,7 +13,7 @@ export function PostCardListView({
   post,
   loading,
 }: {
-  post: CoreContent<Blog>
+  post: ContentPost
   loading?: 'lazy' | 'eager'
 }) {
   const { slug, date, title, summary, tags, images, readingTime } = post

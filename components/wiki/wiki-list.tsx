@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import type { CoreContent } from 'pliny/utils/contentlayer'
-import type { Wiki } from 'contentlayer/generated'
+
+import type { ContentPost } from '~/server/content-api'
 import { WikiCard } from '~/components/cards/wiki'
 import { SearchArticles } from '~/components/blog/search-articles'
 
 interface WikiListProps {
-  posts: CoreContent<Wiki>[]
+  posts: ContentPost[]
 }
 
 export function WikiList({ posts }: WikiListProps) {

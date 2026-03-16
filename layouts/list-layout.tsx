@@ -1,9 +1,9 @@
 'use client'
 
-import type { Blog, Wiki } from 'contentlayer/generated'
+import type { ContentPost, ContentAuthor } from '~/server/content-api'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+
 import { useState } from 'react'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
 import { WikiCard } from '~/components/cards/wiki'
@@ -18,9 +18,9 @@ interface PaginationProps {
   currentPage: number
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog | Wiki>[]
+  posts: ContentPost[]
   title: string
-  initialDisplayPosts?: CoreContent<Blog | Wiki>[]
+  initialDisplayPosts?: ContentPost[]
   pagination?: PaginationProps
 }
 
@@ -106,9 +106,9 @@ export function ListLayout({
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 py-10 md:gap-y-16 lg:grid-cols-2 xl:grid-cols-3">
           {displayPosts.map((post) =>
             post.type === 'Blog' ? (
-              <PostCardGridView key={post.path} post={post as CoreContent<Blog>} />
+              <PostCardGridView key={post.path} post={post as ContentPost} />
             ) : (
-              <WikiCard key={post.path} wiki={post as CoreContent<Wiki>} />
+              <WikiCard key={post.path} wiki={post as ContentPost} />
             )
           )}
         </div>

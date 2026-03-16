@@ -1,14 +1,15 @@
 import { genPageMetadata } from 'app/seo'
-import { allWikis } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import { getAllWikis, sortPosts, allCoreContent } from '~/server/content-api'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import { WikiList } from '~/components/wiki/wiki-list'
 
+export const revalidate = 5
 export const metadata = genPageMetadata({ title: 'Wiki' })
 
-export default function WikiPage() {
-  const posts = allCoreContent(sortPosts(allWikis))
+export default async function WikiPage() {
+  const data = await getAllWikis()
+  const posts = allCoreContent(sortPosts(data))
 
   return (
     <Container className="pt-4 lg:pt-12">

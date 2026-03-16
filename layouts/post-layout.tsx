@@ -1,5 +1,5 @@
-import type { Author, Blog } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost, ContentAuthor } from '~/server/content-api'
+
 import type { ReactNode } from 'react'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 import { Banner } from '~/components/blog/banner'
@@ -16,8 +16,8 @@ import { GradientDivider } from '~/components/ui/gradient-divider'
 import { SITE_METADATA } from '~/data/site-metadata'
 
 interface LayoutProps {
-  content: CoreContent<Blog>
-  authorDetails: CoreContent<Author>[]
+  content: ContentPost
+  authorDetails: ContentAuthor[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode

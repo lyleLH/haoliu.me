@@ -2,8 +2,8 @@
 'use client'
 
 import { clsx } from 'clsx'
-import type { Blog, Snippet } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost, ContentAuthor } from '~/server/content-api'
+
 import { useState } from 'react'
 import { Tag } from '~/components/blog/tags'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
@@ -15,8 +15,8 @@ import tagData from '~/json/tag-data.json'
 interface ListLayoutProps {
   title: string
   description: React.ReactNode
-  posts: CoreContent<Blog>[]
-  snippets: CoreContent<Snippet>[]
+  posts: ContentPost[]
+  snippets: ContentPost[]
 }
 
 export function ListLayoutWithTags({ title, description, posts, snippets }: ListLayoutProps) {

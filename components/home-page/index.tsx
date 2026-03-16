@@ -1,5 +1,5 @@
-import type { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Snippet } from '~/.contentlayer/generated'
+
+import type { ContentPost } from '~/server/content-api'
 import { ProfileCard } from '~/components/cards/profile'
 import { Container } from '~/components/ui/container'
 import { Twemoji } from '~/components/ui/twemoji'
@@ -13,8 +13,8 @@ export function Home({
   posts,
   snippets,
 }: {
-  posts: CoreContent<Blog>[]
-  snippets: CoreContent<Snippet>[]
+  posts: ContentPost[]
+  snippets: ContentPost[]
 }) {
   return (
     <Container as="div" className="pt-4 lg:pt-12">

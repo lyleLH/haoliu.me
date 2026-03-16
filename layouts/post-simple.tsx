@@ -1,5 +1,5 @@
-import type { Blog, Snippet } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost, ContentAuthor } from '~/server/content-api'
+
 import type { ReactNode } from 'react'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 import { BlogMeta } from '~/components/blog/blog-meta'
@@ -12,7 +12,7 @@ import { Container } from '~/components/ui/container'
 import { SITE_METADATA } from '~/data/site-metadata'
 
 interface PostSimpleProps {
-  content: CoreContent<Blog | Snippet>
+  content: ContentPost
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }

@@ -1,13 +1,14 @@
 import { genPageMetadata } from 'app/seo'
-import { allBlogs } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import { getAllBlogs, sortPosts, allCoreContent } from '~/server/content-api'
 import { ListLayout } from '~/layouts/list-layout'
 import { POSTS_PER_PAGE } from '~/utils/const'
 
+export const revalidate = 5
 export const metadata = genPageMetadata({ title: 'Blog' })
 
-export default function BlogPage() {
-  const posts = allCoreContent(sortPosts(allBlogs))
+export default async function BlogPage() {
+  const blogs = await getAllBlogs()
+  const posts = allCoreContent(sortPosts(blogs))
   const pageNumber = 1
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),

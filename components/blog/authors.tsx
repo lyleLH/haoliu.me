@@ -1,9 +1,9 @@
-import type { CoreContent } from 'pliny/utils/contentlayer'
-import type { Author } from '~/.contentlayer/generated'
+
+import type { ContentAuthor } from '~/server/content-api'
 import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 interface AuthorsProps {
-  authors: CoreContent<Author>[]
+  authors: ContentAuthor[]
   className?: string
 }
 export function Authors({ authors, className }: AuthorsProps) {

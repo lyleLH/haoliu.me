@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
-import type { Blog } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost, ContentAuthor } from '~/server/content-api'
+
 import type { ReactNode } from 'react'
 import { Banner } from '~/components/blog/banner'
 import { BlogMeta } from '~/components/blog/blog-meta'
@@ -14,7 +14,7 @@ import { SITE_METADATA } from '~/data/site-metadata'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: ContentPost
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }

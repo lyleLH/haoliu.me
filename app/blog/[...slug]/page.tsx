@@ -1,21 +1,27 @@
-import type { Author, Blog } from 'contentlayer/generated'
-import { allAuthors, allBlogs } from 'contentlayer/generated'
 import 'css/prism.css'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { allCoreContent, coreContent, sortPosts } from 'pliny/utils/contentlayer'
+import {
+  getAllBlogs,
+  getBlogBySlug,
+  getAuthorBySlug,
+  sortPosts,
+  allCoreContent,
+} from '~/server/content-api'
+import { MDXRenderer } from '~/components/mdx/mdx-renderer'
 import { MDX_COMPONENTS } from '~/components/mdx'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { PostBanner } from '~/layouts/post-banner'
 import { PostLayout } from '~/layouts/post-layout'
 import { PostSimple } from '~/layouts/post-simple'
 
+export const revalidate = 5
+
 const DEFAULT_LAYOUT = 'PostLayout'
-const LAYOUTS = {
-  PostSimple,
+const LAYOUTS: Record<string, typeof PostLayout> = {
+  PostSimple: PostSimple as unknown as typeof PostLayout,
   PostLayout,
-  PostBanner,
+  PostBanner: PostBanner as unknown as typeof PostLayout,
 }
 
 export async function generateMetadata({
@@ -24,82 +30,76 @@ export async function generateMetadata({
   params: { slug: string[] }
 }): Promise<Metadata | undefined> {
   const slug = decodeURI((await params).slug.join('/'))
-  const post = allBlogs.find((p) => p.slug === slug)
-  const authorList = post?.authors || ['default']
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
-    return coreContent(authorResults as Author)
-  })
-  if (!post) {
-    return
-  }
+  try {
+    const post = await getBlogBySlug(slug)
+    const authorSlugs = post.authors || ['default']
+    const authorDetails = await Promise.all(authorSlugs.map(getAuthorBySlug))
 
-  const publishedAt = new Date(post.date).toISOString()
-  const modifiedAt = new Date(post.lastmod || post.date).toISOString()
-  const authors = authorDetails.map((author) => author.name)
-  let imageList = [SITE_METADATA.socialBanner]
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images
-  }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img.includes('http') ? img : SITE_METADATA.siteUrl + img,
+    const publishedAt = new Date(post.date).toISOString()
+    const modifiedAt = new Date(post.lastmod || post.date).toISOString()
+    const authors = authorDetails.map((a) => a.name)
+    let imageList = [SITE_METADATA.socialBanner]
+    if (post.images?.length) {
+      imageList = post.images
     }
-  })
+    const ogImages = imageList.map((img) => ({
+      url: img.includes('http') ? img : SITE_METADATA.siteUrl + img,
+    }))
 
-  return {
-    title: post.title,
-    description: post.summary,
-    openGraph: {
+    return {
       title: post.title,
       description: post.summary,
-      siteName: SITE_METADATA.title,
-      locale: 'en_US',
-      type: 'article',
-      publishedTime: publishedAt,
-      modifiedTime: modifiedAt,
-      url: './',
-      images: ogImages,
-      authors: authors.length > 0 ? authors : [SITE_METADATA.author],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
-      images: imageList,
-    },
+      openGraph: {
+        title: post.title,
+        description: post.summary,
+        siteName: SITE_METADATA.title,
+        locale: 'en_US',
+        type: 'article',
+        publishedTime: publishedAt,
+        modifiedTime: modifiedAt,
+        url: './',
+        images: ogImages,
+        authors: authors.length > 0 ? authors : [SITE_METADATA.author],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.title,
+        description: post.summary,
+        images: imageList,
+      },
+    }
+  } catch {
+    return undefined
   }
-}
-
-export const generateStaticParams = async () => {
-  return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
-  // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
-  if (postIndex === -1) {
-    return notFound()
+
+  const [allBlogs, post] = await Promise.all([
+    getAllBlogs(),
+    getBlogBySlug(slug).catch(() => null),
+  ])
+
+  if (!post) return notFound()
+
+  const sortedPosts = allCoreContent(sortPosts(allBlogs))
+  const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
+  const prev = postIndex >= 0 ? sortedPosts[postIndex + 1] : undefined
+  const next = postIndex >= 0 ? sortedPosts[postIndex - 1] : undefined
+
+  const authorSlugs = post.authors || ['default']
+  const authorDetails = await Promise.all(authorSlugs.map(getAuthorBySlug))
+
+  const mainContent = {
+    ...post,
+    type: 'Blog' as const,
   }
 
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
-  const post = allBlogs.find((p) => p.slug === slug) as Blog
-  const authorList = post?.authors || ['default']
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
-    return coreContent(authorResults as Author)
-  })
-  const mainContent = coreContent(post)
-  const jsonLd = post.structuredData
-  jsonLd['author'] = authorDetails.map((author) => {
-    return {
-      '@type': 'Person',
-      name: author.name,
-    }
-  })
+  const jsonLd = {
+    ...post.structuredData,
+    author: authorDetails.map((a) => ({ '@type': 'Person', name: a.name })),
+  }
 
   const Layout = LAYOUTS[post.layout || DEFAULT_LAYOUT]
 
@@ -110,7 +110,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
-        <MDXLayoutRenderer code={post.body.code} components={MDX_COMPONENTS} toc={post.toc} />
+        <MDXRenderer source={post.rawContent || ''} />
       </Layout>
     </>
   )

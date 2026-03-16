@@ -1,9 +1,9 @@
 'use client'
 
 import { clsx } from 'clsx'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+
 import { useState } from 'react'
-import type { Blog, Snippet } from '~/.contentlayer/generated'
+import type { ContentPost } from '~/server/content-api'
 import { PostCardListView } from '~/components/blog/post-card-list-view'
 import { SnippetCard } from '~/components/cards/snippet'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
@@ -13,8 +13,8 @@ export function LatestPosts({
   posts,
   snippets,
 }: {
-  posts: CoreContent<Blog>[]
-  snippets: CoreContent<Snippet>[]
+  posts: ContentPost[]
+  snippets: ContentPost[]
 }) {
   const [view, setView] = useState<'posts' | 'snippets'>('posts')
   return (

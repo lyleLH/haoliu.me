@@ -1,13 +1,13 @@
 import { clsx } from 'clsx'
-import type { Wiki } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost } from '~/server/content-api'
+
 import { formatDate } from 'pliny/utils/formatDate'
 import { GradientBorder } from '~/components/ui/gradient-border'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
 import { Link } from '~/components/ui/link'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 
-export function WikiCard({ wiki }: { wiki: CoreContent<Wiki> }) {
+export function WikiCard({ wiki }: { wiki: ContentPost }) {
   const { path, date, title, summary, tags, link } = wiki
   const href = link || `/${path}`
 

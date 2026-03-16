@@ -1,20 +1,22 @@
-import { allBlogs, allSnippets } from 'contentlayer/generated'
 import type { MetadataRoute } from 'next'
+import { getAllBlogs, getAllSnippets } from '~/server/content-api'
 import { SITE_METADATA } from '~/data/site-metadata'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = SITE_METADATA.siteUrl
-  const blogRoutes = allBlogs
+  const [blogs, snippets] = await Promise.all([getAllBlogs(), getAllSnippets()])
+
+  const blogRoutes = blogs
     .filter((p) => !p.draft)
-    .map(({ path, lastmod, date }) => ({
-      url: `${siteUrl}/${path}`,
-      lastModified: lastmod || date,
+    .map((p) => ({
+      url: `${siteUrl}/blog/${p.slug}`,
+      lastModified: p.lastmod || p.date,
     }))
-  const snippetRoutes = allSnippets
+  const snippetRoutes = snippets
     .filter((s) => !s.draft)
-    .map(({ path, lastmod, date }) => ({
-      url: `${siteUrl}/snippets/${path}`,
-      lastModified: lastmod || date,
+    .map((s) => ({
+      url: `${siteUrl}/snippets/${s.slug}`,
+      lastModified: s.lastmod || s.date,
     }))
 
   const routes = ['', 'blog', 'snippets', 'projects', 'about', 'books', 'movies', 'tags'].map(

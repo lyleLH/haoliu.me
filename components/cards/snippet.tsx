@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
-import { type Snippet } from 'contentlayer/generated'
-import { type CoreContent } from 'pliny/utils/contentlayer'
+import type { ContentPost } from '~/server/content-api'
+
 import { Link } from '~/components/ui/link'
 import type { BrandsMap } from '~/components/ui/brand'
 import { Brand } from '~/components/ui/brand'
@@ -8,7 +8,7 @@ import { GradientBorder } from '~/components/ui/gradient-border'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 
-export function SnippetCard({ snippet }: { snippet: CoreContent<Snippet> }) {
+export function SnippetCard({ snippet }: { snippet: ContentPost }) {
   const { icon, heading, summary, title, path } = snippet
   return (
     <GradientBorder className="relative z-0 rounded-2xl">

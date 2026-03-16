@@ -1,17 +1,12 @@
-import { allBlogs } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import { getAllBlogs, sortPosts, allCoreContent } from '~/server/content-api'
 import { ListLayout } from '~/layouts/list-layout'
 import { POSTS_PER_PAGE } from '~/utils/const'
 
-export const generateStaticParams = async () => {
-  const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE)
-  const paths = Array.from({ length: totalPages }, (_, i) => ({ page: (i + 1).toString() }))
+export const revalidate = 5
 
-  return paths
-}
-
-export default function Page({ params }: { params: { page: string } }) {
-  const posts = allCoreContent(sortPosts(allBlogs))
+export default async function Page({ params }: { params: { page: string } }) {
+  const blogs = await getAllBlogs()
+  const posts = allCoreContent(sortPosts(blogs))
   const pageNumber = parseInt(params.page as string)
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
