@@ -71,6 +71,14 @@ module.exports = () => {
     images: {
       remotePatterns: [
         {
+          protocol: 'http',
+          hostname: 'localhost', // local dev API images
+        },
+        {
+          protocol: 'https',
+          hostname: '*.workers.dev', // Cloudflare Workers API images
+        },
+        {
           protocol: 'https',
           hostname: 'i.gr-assets.com', // Goodreads book covers
         },
@@ -132,6 +140,15 @@ module.exports = () => {
               value: 'https://giscus.app https://docs.google.com',
             },
           ],
+        },
+      ]
+    },
+    async rewrites() {
+      const apiUrl = process.env.CONTENT_API_URL || 'http://localhost:8787'
+      return [
+        {
+          source: '/api/images/file/:path*',
+          destination: `${apiUrl}/api/images/file/:path*`,
         },
       ]
     },
