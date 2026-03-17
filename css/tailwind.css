@@ -59,6 +59,14 @@ input:-webkit-autofill:focus {
   vertical-align: middle;
 }
 
+.prose iframe,
+.prose video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+}
+
 code,
 kbd,
 pre,
