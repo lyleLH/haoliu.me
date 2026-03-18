@@ -151,6 +151,10 @@ module.exports = () => {
       const apiUrl = process.env.CONTENT_API_URL || 'http://localhost:8787'
       return [
         {
+          source: '/api/content/:path*',
+          destination: `${apiUrl}/api/content/:path*`,
+        },
+        {
           source: '/api/images/file/:path*',
           destination: `${apiUrl}/api/images/file/:path*`,
         },

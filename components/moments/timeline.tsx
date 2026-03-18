@@ -114,7 +114,7 @@ export function MomentsTimeline({
       {/* Center — Timeline */}
       <main className="min-w-0 flex-1 overflow-hidden">
         {/* Mobile filters */}
-        <div className="mb-4 flex gap-2 overflow-x-auto pb-2 lg:hidden">
+        <div className="mb-4 flex flex-wrap gap-2 lg:hidden">
           <TypeFilter
             selectedType={selectedType}
             onSelectType={handleTypeSelect}
