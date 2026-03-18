@@ -95,7 +95,7 @@ export function MomentsTimeline({
   const groups = groupByDate(entries)
 
   return (
-    <div className="flex w-full flex-col gap-6 lg:flex-row lg:gap-8">
+    <div className="flex flex-col gap-6 overflow-x-hidden lg:flex-row lg:gap-8">
       {/* Left sidebar — Calendar + Type Filter (desktop) */}
       <aside className="hidden shrink-0 lg:block lg:w-56">
         <div className="space-y-4 lg:sticky lg:top-24">
@@ -112,7 +112,7 @@ export function MomentsTimeline({
       </aside>
 
       {/* Center — Timeline */}
-      <main className="min-w-0 w-full flex-1">
+      <main className="min-w-0 flex-1 overflow-hidden">
         {/* Mobile filters */}
         <div className="mb-4 flex gap-2 overflow-x-auto pb-2 lg:hidden">
           <TypeFilter
