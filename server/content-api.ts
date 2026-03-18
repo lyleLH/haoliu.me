@@ -148,6 +148,31 @@ export async function getSearchIndex(): Promise<ContentPost[]> {
   return fetchAPI<ContentPost[]>('/search')
 }
 
+// --- Moments ---
+
+export interface MomentEntry {
+  slug: string
+  type: 'text' | 'photo' | 'bookmark'
+  content: string | null
+  media: Array<{ type: string; url: string; width?: number; height?: number }>
+  bookmark: { url: string; title: string; description: string; image: string | null } | null
+  tags: string[]
+  createdAt: string
+}
+
+export async function getAllMoments(
+  page = 1,
+  limit = 20
+): Promise<{ entries: MomentEntry[]; hasMore: boolean }> {
+  return fetchAPI<{ entries: MomentEntry[]; hasMore: boolean }>(
+    `/moments?page=${page}&limit=${limit}`
+  )
+}
+
+export async function getMomentBySlug(slug: string): Promise<MomentEntry> {
+  return fetchAPI<MomentEntry>(`/moment/${slug}`)
+}
+
 // --- Helpers (replace pliny/utils/contentlayer) ---
 
 export function sortPosts(posts: ContentPost[]): ContentPost[] {
