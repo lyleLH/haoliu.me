@@ -49,7 +49,7 @@ export function MomentsTimeline({
     <div className="space-y-8">
       {groups.map(({ label, items }) => (
         <div key={label}>
-          <div className="sticky top-0 z-10 mb-4 flex items-center gap-2 bg-white/80 py-2 backdrop-blur dark:bg-gray-950/80">
+          <div className="mb-4 flex items-center gap-2 py-2">
             <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{label}</span>
             <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
