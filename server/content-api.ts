@@ -152,21 +152,33 @@ export async function getSearchIndex(): Promise<ContentPost[]> {
 
 export interface MomentEntry {
   slug: string
-  type: 'text' | 'photo' | 'bookmark'
+  type: 'text' | 'photo' | 'bookmark' | 'tweet' | 'youtube' | 'github'
   content: string | null
   media: Array<{ type: string; url: string; width?: number; height?: number }>
-  bookmark: { url: string; title: string; description: string; image: string | null } | null
+  bookmark: { url: string; title: string; description: string; image: string | null; embedId?: string | null } | null
   tags: string[]
   createdAt: string
 }
 
+export interface MomentsMeta {
+  dates: string[]
+  tags: Record<string, number>
+}
+
 export async function getAllMoments(
   page = 1,
-  limit = 20
+  limit = 20,
+  filters?: { date?: string; tag?: string; q?: string }
 ): Promise<{ entries: MomentEntry[]; hasMore: boolean }> {
-  return fetchAPI<{ entries: MomentEntry[]; hasMore: boolean }>(
-    `/moments?page=${page}&limit=${limit}`
-  )
+  const params = new URLSearchParams({ page: String(page), limit: String(limit) })
+  if (filters?.date) params.set('date', filters.date)
+  if (filters?.tag) params.set('tag', filters.tag)
+  if (filters?.q) params.set('q', filters.q)
+  return fetchAPI<{ entries: MomentEntry[]; hasMore: boolean }>(`/moments?${params}`)
+}
+
+export async function getMomentsMeta(): Promise<MomentsMeta> {
+  return fetchAPI<MomentsMeta>('/moments/meta')
 }
 
 export async function getMomentBySlug(slug: string): Promise<MomentEntry> {

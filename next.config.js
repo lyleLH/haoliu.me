@@ -80,11 +80,15 @@ module.exports = () => {
         },
         {
           protocol: 'https',
-          hostname: 'i.gr-assets.com', // Goodreads book covers
+          hostname: 'unavatar.io', // Social avatars
         },
         {
           protocol: 'https',
-          hostname: 'i.scdn.co', // Spotify album covers
+          hostname: 'avatars.githubusercontent.com', // GitHub avatars
+        },
+        {
+          protocol: 'https',
+          hostname: 'i.gr-assets.com', // Goodreads book covers
         },
         {
           protocol: 'https',

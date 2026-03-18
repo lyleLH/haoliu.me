@@ -21,32 +21,9 @@ module.exports = {
           '50%': { transform: 'rotate(180deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
-        'music-bar-1': {
-          '0%, 100%': { height: '0%' },
-          '50%': { height: '70%' },
-        },
-        'music-bar-2': {
-          '0%, 100%': { height: '50%' },
-          '25%': { height: '0%' },
-          '75%': { height: '100%' },
-        },
-        'music-bar-3': {
-          '0%, 100%': { height: '70%' },
-          '15%': { height: '100%' },
-          '65%': { height: '0%' },
-        },
-        'music-bar-4': {
-          '0%, 100%': { height: '50%' },
-          '35.7%': { height: '0%' },
-          '85.7%': { height: '70%' },
-        },
       },
       animation: {
         wiggle: 'wiggle 7s linear infinite',
-        'music-bar-1': 'music-bar-1 .8s linear infinite',
-        'music-bar-2': 'music-bar-2 .8s linear infinite',
-        'music-bar-3': 'music-bar-3 .8s linear infinite',
-        'music-bar-4': 'music-bar-4 .8s linear infinite',
       },
       boxShadow: {
         demure: 'rgba(0, 0, 0, 0.3) 0 35px 60px -15px',
@@ -73,7 +50,6 @@ module.exports = {
       colors: {
         primary: colors.indigo,
         dark: '#1f1f1f',
-        spotify: '#1DB954',
         goodreads: '#372213',
         facebook: '#1877f2',
         x: '#0f1419',

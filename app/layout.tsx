@@ -6,8 +6,7 @@ import 'remark-github-blockquote-alert/alert.css'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Nunito, Playpen_Sans } from 'next/font/google'
-import type { SearchConfig } from 'pliny/search'
-import { SearchProvider } from 'pliny/search'
+import { SearchProvider } from '~/components/search-provider'
 import { UmamiAnalytics } from '~/components/analytics/umami'
 import { Footer } from '~/components/footer'
 import { Header } from '~/components/header'
@@ -131,7 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TiltedGridBackground className="inset-x-0 top-0 z-[-1] h-[50vh]" />
         <ThemeProviders>
           <UmamiAnalytics websiteId={SITE_METADATA.analytics.umamiAnalytics.websiteId} />
-          <SearchProvider searchConfig={SITE_METADATA.search as SearchConfig}>
+          <SearchProvider>
             <Header />
             <main className="mb-auto grow">{children}</main>
           </SearchProvider>

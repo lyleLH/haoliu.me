@@ -44,7 +44,7 @@ export const SITE_METADATA = {
     provider: 'kbar',
     kbarConfig: {
       // path to load documents to search
-      searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`,
+      searchDocumentsPath: `${process.env.NEXT_PUBLIC_CONTENT_API_URL || ''}/api/content/search`,
     },
   },
 }

@@ -74,3 +74,9 @@ samp {
   font-family: var(--font-jetbrains-mono), monospace;
   font-weight: 500;
 }
+
+/* Fix KBar search overlay being covered by page content */
+[data-kbar-portal] {
+  z-index: 9999;
+  position: relative;
+}

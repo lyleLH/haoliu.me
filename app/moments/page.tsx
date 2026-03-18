@@ -1,5 +1,5 @@
 import { genPageMetadata } from 'app/seo'
-import { getAllMoments } from '~/server/content-api'
+import { getAllMoments, getMomentsMeta } from '~/server/content-api'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import { MomentsTimeline } from '~/components/moments/timeline'
@@ -11,7 +11,7 @@ export const metadata = genPageMetadata({
 })
 
 export default async function MomentsPage() {
-  const { entries, hasMore } = await getAllMoments()
+  const [{ entries, hasMore }, meta] = await Promise.all([getAllMoments(), getMomentsMeta()])
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -20,8 +20,13 @@ export default async function MomentsPage() {
         description="Short thoughts, photos, bookmarks, and updates."
         className="border-b border-gray-200 dark:border-gray-700"
       />
-      <div className="py-8">
-        <MomentsTimeline initialEntries={entries} initialHasMore={hasMore} />
+      <div className="min-h-[60vh] py-8">
+        <MomentsTimeline
+          initialEntries={entries}
+          initialHasMore={hasMore}
+          activeDates={meta.dates}
+          allTags={meta.tags}
+        />
       </div>
     </Container>
   )
