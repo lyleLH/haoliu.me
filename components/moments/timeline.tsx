@@ -95,9 +95,9 @@ export function MomentsTimeline({
   const groups = groupByDate(entries)
 
   return (
-    <div className="flex flex-col gap-8 lg:flex-row">
-      {/* Left sidebar — Calendar + Type Filter */}
-      <aside className="w-full shrink-0 lg:w-56">
+    <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+      {/* Left sidebar — Calendar + Type Filter (desktop) */}
+      <aside className="hidden shrink-0 lg:block lg:w-56">
         <div className="space-y-4 lg:sticky lg:top-24">
           <MomentsCalendar
             activeDates={activeDateSet}
@@ -113,6 +113,14 @@ export function MomentsTimeline({
 
       {/* Center — Timeline */}
       <main className="min-w-0 flex-1">
+        {/* Mobile filters */}
+        <div className="mb-4 flex gap-2 overflow-x-auto pb-2 lg:hidden">
+          <TypeFilter
+            selectedType={selectedType}
+            onSelectType={handleTypeSelect}
+            horizontal
+          />
+        </div>
         {/* Active filter indicator */}
         {(selectedDate || selectedTag || selectedType) && (
           <div className="mb-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
@@ -190,8 +198,8 @@ export function MomentsTimeline({
         </div>
       </main>
 
-      {/* Right sidebar — Tags */}
-      <aside className="w-full shrink-0 lg:w-48">
+      {/* Right sidebar — Tags (desktop only) */}
+      <aside className="hidden shrink-0 lg:block lg:w-48">
         <div className="lg:sticky lg:top-24">
           <TagsPanel tags={allTags} selectedTag={selectedTag} onSelectTag={handleTagSelect} />
         </div>

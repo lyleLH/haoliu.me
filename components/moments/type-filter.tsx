@@ -15,9 +15,35 @@ const TYPES = [
 interface TypeFilterProps {
   selectedType: string | null
   onSelectType: (type: string | null) => void
+  horizontal?: boolean
 }
 
-export function TypeFilter({ selectedType, onSelectType }: TypeFilterProps) {
+export function TypeFilter({ selectedType, onSelectType, horizontal }: TypeFilterProps) {
+  if (horizontal) {
+    return (
+      <>
+        {TYPES.map(({ value, label, Icon }) => {
+          const isSelected = selectedType === value
+          return (
+            <button
+              key={value}
+              onClick={() => onSelectType(isSelected ? null : value)}
+              className={clsx(
+                'flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors',
+                isSelected
+                  ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900'
+                  : 'bg-zinc-100 text-gray-600 dark:bg-white/5 dark:text-gray-400'
+              )}
+            >
+              <Icon size={12} />
+              {label}
+            </button>
+          )
+        })}
+      </>
+    )
+  }
+
   return (
     <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
       <h3 className="mb-3 text-sm font-semibold text-gray-800 dark:text-gray-200">Type</h3>
