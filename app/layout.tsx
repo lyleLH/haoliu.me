@@ -121,7 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={clsx([
           'antialiased',
-          'relative min-h-screen pl-[calc(100vw-100%)]',
+          'relative min-h-screen overflow-x-hidden pl-[calc(100vw-100%)]',
           'flex flex-col',
           'bg-white text-gray-900',
           'dark:bg-dark dark:text-gray-100',
