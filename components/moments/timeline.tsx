@@ -10,6 +10,7 @@ import { GradientBorder } from '~/components/ui/gradient-border'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 import { TweetCard, YouTubeEmbed, GitHubRepoCard } from './embeds'
 import { MomentsCalendar } from './calendar'
+import { TypeFilter } from './type-filter'
 import { TagsPanel } from './tags-panel'
 import type { MomentEntry } from '~/server/content-api'
 
@@ -37,16 +38,18 @@ export function MomentsTimeline({
   const [loading, setLoading] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [selectedType, setSelectedType] = useState<string | null>(null)
 
   const activeDateSet = new Set(activeDates)
 
   const fetchEntries = useCallback(
-    async (date: string | null, tag: string | null, pg = 1) => {
+    async (date: string | null, tag: string | null, pg = 1, type: string | null = null) => {
       setLoading(true)
       try {
         const params = new URLSearchParams({ page: String(pg), limit: '20' })
         if (date) params.set('date', date)
         if (tag) params.set('tag', tag)
+        if (type) params.set('type', type)
         const res = await fetch(`${API_BASE}/api/content/moments?${params}`)
         const data = await res.json()
         if (pg === 1) {
@@ -67,29 +70,38 @@ export function MomentsTimeline({
 
   const handleDateSelect = (date: string | null) => {
     setSelectedDate(date)
-    fetchEntries(date, selectedTag, 1)
+    fetchEntries(date, selectedTag, 1, selectedType)
   }
 
   const handleTagSelect = (tag: string | null) => {
     setSelectedTag(tag)
-    fetchEntries(selectedDate, tag, 1)
+    fetchEntries(selectedDate, tag, 1, selectedType)
+  }
+
+  const handleTypeSelect = (type: string | null) => {
+    setSelectedType(type)
+    fetchEntries(selectedDate, selectedTag, 1, type)
   }
 
   const loadMore = () => {
-    fetchEntries(selectedDate, selectedTag, page + 1)
+    fetchEntries(selectedDate, selectedTag, page + 1, selectedType)
   }
 
   const groups = groupByDate(entries)
 
   return (
     <div className="flex flex-col gap-8 lg:flex-row">
-      {/* Left sidebar — Calendar */}
+      {/* Left sidebar — Calendar + Type Filter */}
       <aside className="w-full shrink-0 lg:w-56">
-        <div className="lg:sticky lg:top-24">
+        <div className="space-y-4 lg:sticky lg:top-24">
           <MomentsCalendar
             activeDates={activeDateSet}
             selectedDate={selectedDate}
             onSelectDate={handleDateSelect}
+          />
+          <TypeFilter
+            selectedType={selectedType}
+            onSelectType={handleTypeSelect}
           />
         </div>
       </aside>
@@ -97,7 +109,7 @@ export function MomentsTimeline({
       {/* Center — Timeline */}
       <main className="min-w-0 flex-1">
         {/* Active filter indicator */}
-        {(selectedDate || selectedTag) && (
+        {(selectedDate || selectedTag || selectedType) && (
           <div className="mb-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <span>Filtered by:</span>
             {selectedDate && (
@@ -110,11 +122,17 @@ export function MomentsTimeline({
                 #{selectedTag}
               </span>
             )}
+            {selectedType && (
+              <span className="rounded-lg bg-gray-100 px-2 py-0.5 font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                {selectedType}
+              </span>
+            )}
             <button
               onClick={() => {
                 setSelectedDate(null)
                 setSelectedTag(null)
-                fetchEntries(null, null, 1)
+                setSelectedType(null)
+                fetchEntries(null, null, 1, null)
               }}
               className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
             >
