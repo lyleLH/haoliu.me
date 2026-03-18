@@ -149,7 +149,7 @@ export function MomentsTimeline({
               </h2>
               <div className="space-y-5">
                 {items.map((entry) => (
-                  <MomentCard key={entry.slug} entry={entry} />
+                  <MomentCard key={entry.slug} entry={entry} onTagClick={handleTagSelect} />
                 ))}
               </div>
             </div>
@@ -195,7 +195,7 @@ export function MomentsTimeline({
   )
 }
 
-function MomentCard({ entry }: { entry: MomentEntry }) {
+function MomentCard({ entry, onTagClick }: { entry: MomentEntry; onTagClick: (tag: string) => void }) {
   const time = new Date(entry.createdAt).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -261,9 +261,9 @@ function MomentCard({ entry }: { entry: MomentEntry }) {
               <>
                 <span className="mx-1 text-gray-400">/</span>
                 {entry.tags.map((tag) => (
-                  <span key={tag}>
+                  <button key={tag} onClick={() => onTagClick(tag)} className="cursor-pointer">
                     <GrowingUnderline>#{tag}</GrowingUnderline>
-                  </span>
+                  </button>
                 ))}
               </>
             )}
