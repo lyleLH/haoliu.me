@@ -16,6 +16,11 @@ import type { MomentEntry } from '~/server/content-api'
 
 const API_BASE = process.env.NEXT_PUBLIC_CONTENT_API_URL || ''
 
+// D1 stores UTC without 'Z' suffix — append it so Date parses as UTC
+function parseUTC(dateStr: string) {
+  return new Date(dateStr.endsWith('Z') ? dateStr : dateStr + 'Z')
+}
+
 function resolveMediaUrl(url: string) {
   if (url.startsWith('http')) return url
   return `${API_BASE}${url}`
@@ -196,7 +201,7 @@ export function MomentsTimeline({
 }
 
 function MomentCard({ entry, onTagClick }: { entry: MomentEntry; onTagClick: (tag: string) => void }) {
-  const time = new Date(entry.createdAt).toLocaleTimeString('en-US', {
+  const time = parseUTC(entry.createdAt).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
@@ -348,14 +353,17 @@ function groupByDate(entries: MomentEntry[]): { label: string; items: MomentEntr
   const groups: Map<string, MomentEntry[]> = new Map()
 
   for (const entry of entries) {
-    const date = new Date(entry.createdAt)
-    const key = date.toISOString().split('T')[0]
+    const date = parseUTC(entry.createdAt)
+    // Group by local date
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
     if (!groups.has(key)) groups.set(key, [])
     groups.get(key)!.push(entry)
   }
 
-  const today = new Date().toISOString().split('T')[0]
-  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
+  const now = new Date()
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+  const yd = new Date(Date.now() - 86400000)
+  const yesterday = `${yd.getFullYear()}-${String(yd.getMonth() + 1).padStart(2, '0')}-${String(yd.getDate()).padStart(2, '0')}`
 
   return Array.from(groups.entries()).map(([key, items]) => {
     let label = key

@@ -14,8 +14,12 @@ function resolveMediaUrl(url: string) {
   return `${API_BASE}${url}`
 }
 
+function parseUTC(dateStr: string) {
+  return new Date(dateStr.endsWith('Z') ? dateStr : dateStr + 'Z')
+}
+
 export function MomentDetail({ entry }: { entry: MomentEntry }) {
-  const date = new Date(entry.createdAt)
+  const date = parseUTC(entry.createdAt)
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
