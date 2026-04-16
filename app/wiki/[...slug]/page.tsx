@@ -13,11 +13,13 @@ import { SITE_METADATA } from '~/data/site-metadata'
 import { PostBanner } from '~/layouts/post-banner'
 import { PostLayout } from '~/layouts/post-layout'
 import { PostSimple } from '~/layouts/post-simple'
+import { WikiLayout } from '~/layouts/wiki-layout'
 
 export const revalidate = 5
 
-const DEFAULT_LAYOUT = 'PostLayout'
+const DEFAULT_LAYOUT = 'WikiLayout'
 const LAYOUTS: Record<string, typeof PostLayout> = {
+  WikiLayout: WikiLayout as unknown as typeof PostLayout,
   PostSimple: PostSimple as unknown as typeof PostLayout,
   PostLayout,
   PostBanner: PostBanner as unknown as typeof PostLayout,
