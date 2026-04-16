@@ -11,7 +11,6 @@ import { SnippetCard } from '~/components/cards/snippet'
 import { WikiCard } from '~/components/cards/wiki'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
-import tagData from '~/json/tag-data.json'
 
 interface ListLayoutProps {
   title: string
@@ -19,6 +18,7 @@ interface ListLayoutProps {
   posts: ContentPost[]
   snippets: ContentPost[]
   wikis?: ContentPost[]
+  tagCounts: Record<string, number>
 }
 
 type ViewMode = 'blogs' | 'snippets' | 'wikis'
@@ -29,6 +29,7 @@ export function ListLayoutWithTags({
   posts,
   snippets,
   wikis = [],
+  tagCounts,
 }: ListLayoutProps) {
   const hasBlogs = posts.length > 0
   const hasSnippets = snippets.length > 0
@@ -44,7 +45,7 @@ export function ListLayoutWithTags({
         className="border-b border-gray-200 dark:border-gray-700"
       />
       <div className="flex gap-x-12">
-        <TagsList />
+        <TagsList tagCounts={tagCounts} />
         <div className="py-5 md:py-10">
           <div className="mb-6 flex items-center gap-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:mb-10 md:justify-end md:text-3xl">
             {hasBlogs && (
@@ -118,8 +119,7 @@ export function ListLayoutWithTags({
   )
 }
 
-function TagsList() {
-  const tagCounts = tagData as Record<string, number>
+function TagsList({ tagCounts }: { tagCounts: Record<string, number> }) {
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 

@@ -6,6 +6,7 @@ import {
   getAllBlogs,
   getAllSnippets,
   getAllWikis,
+  getTagCounts,
   sortPosts,
   allCoreContent,
 } from '~/server/content-api'
@@ -32,10 +33,11 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
   const tag = decodeURI(params.tag)
   const title = '#' + tag[0] + tag.split(' ').join('-').slice(1)
 
-  const [blogs, snippets, wikis] = await Promise.all([
+  const [blogs, snippets, wikis, tagCounts] = await Promise.all([
     getAllBlogs(),
     getAllSnippets(),
     getAllWikis(),
+    getTagCounts(),
   ])
 
   const matchesTag = (post: { tags?: string[] }) =>
@@ -63,6 +65,7 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
       posts={filteredPosts}
       snippets={filteredSnippets}
       wikis={filteredWikis}
+      tagCounts={tagCounts}
     />
   )
 }
