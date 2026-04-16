@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { Tag } from '~/components/blog/tags'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
 import { SnippetCard } from '~/components/cards/snippet'
+import { WikiCard } from '~/components/cards/wiki'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import tagData from '~/json/tag-data.json'
@@ -17,12 +18,23 @@ interface ListLayoutProps {
   description: React.ReactNode
   posts: ContentPost[]
   snippets: ContentPost[]
+  wikis?: ContentPost[]
 }
 
-export function ListLayoutWithTags({ title, description, posts, snippets }: ListLayoutProps) {
+type ViewMode = 'blogs' | 'snippets' | 'wikis'
+
+export function ListLayoutWithTags({
+  title,
+  description,
+  posts,
+  snippets,
+  wikis = [],
+}: ListLayoutProps) {
   const hasBlogs = posts.length > 0
   const hasSnippets = snippets.length > 0
-  const [view, setView] = useState<'blogs' | 'snippets'>(hasBlogs ? 'blogs' : 'snippets')
+  const hasWikis = wikis.length > 0
+  const initialView: ViewMode = hasBlogs ? 'blogs' : hasSnippets ? 'snippets' : 'wikis'
+  const [view, setView] = useState<ViewMode>(initialView)
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -62,8 +74,22 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
                 Snippets
               </button>
             )}
+            {(hasBlogs || hasSnippets) && hasWikis ? <span>/</span> : null}
+            {hasWikis && (
+              <button
+                className={clsx(
+                  'underline-offset-4',
+                  view === 'wikis'
+                    ? 'underline'
+                    : 'text-gray-400 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
+                )}
+                onClick={() => setView('wikis')}
+              >
+                Wiki
+              </button>
+            )}
           </div>
-          {view === 'blogs' ? (
+          {view === 'blogs' && (
             <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
               {posts.map((post) => (
                 <li key={post.path}>
@@ -71,10 +97,18 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
                 </li>
               ))}
             </ul>
-          ) : (
+          )}
+          {view === 'snippets' && (
             <div className="space-y-10">
               {snippets.map((snippet) => (
                 <SnippetCard snippet={snippet} key={snippet.path} />
+              ))}
+            </div>
+          )}
+          {view === 'wikis' && (
+            <div className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
+              {wikis.map((wiki) => (
+                <WikiCard wiki={wiki} key={wiki.path} />
               ))}
             </div>
           )}
